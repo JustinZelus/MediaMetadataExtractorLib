@@ -12,7 +12,7 @@ namespace MediaMetadataExtractorLib.Main
 
          int MediaType { get; set; }
 
-         Dictionary<string,object> DicMediaInformation { get;}
+         
     }
 
 }

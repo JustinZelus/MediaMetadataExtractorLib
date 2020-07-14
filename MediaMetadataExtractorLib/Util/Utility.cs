@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace MediaMetadataExtractorLib.Util
 {
     public static class Utility
     {
+        public static Dictionary<string, object> ParseObj(object obj)
+        {
+            if (obj == null) return null;
+
+            var result = obj.GetType()
+                            .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                            .ToDictionary(prop => prop.Name, prop => prop.GetValue(obj, null));
+            return result;
+        }
         public static DateTime ParseDate(string s, string format)
         {
             if (DateTime.TryParseExact(s, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime CreatedDate))

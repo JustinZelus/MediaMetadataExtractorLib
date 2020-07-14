@@ -1,9 +1,11 @@
 ﻿
 using MediaMetadataExtractorLib.Main;
+using MediaMetadataExtractorLib.Util;
 
 using System;
 using System.IO;
-
+using System.Linq;
+using System.Reflection;
 
 namespace MediaMetadataExtractorLib
 {
@@ -57,14 +59,17 @@ namespace MediaMetadataExtractorLib
 
 
 
-                if (mediaExtractor == null || mediaExtractor.DicMediaInformation == null)
+                if (mediaExtractor == null || mediaExtractor.MediaInformation == null)
                 {
                     result.IsSuccess = false;
-                    result.Message = "IMediaExtractor不得為空";
+                    result.Message = "IMediaExtractor不得為空或解析失敗";
                     return result;
                 }
 
+
+                var dicMediaInformation = Utility.ParseObj(mediaExtractor.MediaInformation);
                 result.MediaExtractor = mediaExtractor;
+                result.DicMediaInformation = dicMediaInformation;
                 result.IsSuccess = true;
                 result.Message = "MediaMetadataExtractor套件解析成功";
 
@@ -116,14 +121,16 @@ namespace MediaMetadataExtractorLib
                         return null;
                 }
 
-                if (mediaExtractor == null || mediaExtractor.DicMediaInformation == null)
+                if (mediaExtractor == null || mediaExtractor.MediaInformation == null)
                 {
                     result.IsSuccess = false;
-                    result.Message = "IMediaExtractor不得為空";
+                    result.Message = "IMediaExtractor不得為空或解析失敗";
                     return result;
                 }
 
+                var dicMediaInformation = Utility.ParseObj(mediaExtractor.MediaInformation);
                 result.MediaExtractor = mediaExtractor;
+                result.DicMediaInformation = dicMediaInformation;
                 result.IsSuccess = true;
                 result.Message = "MediaMetadataExtractor套件解析成功";
             }

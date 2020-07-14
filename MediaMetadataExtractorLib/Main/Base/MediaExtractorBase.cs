@@ -25,20 +25,7 @@ namespace MediaMetadataExtractorLib.Main.Base
         protected string _path { get; set; }
         public Stream Stream { get; set; }
         public int MediaType { get; set; }
-        public Dictionary<string, object> DicMediaInformation 
-        {
-            get
-            {
-                if (MediaInformation == null)
-                    return null;
-
-                var result = MediaInformation.GetType()
-                                         .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                         .ToDictionary(prop => prop.Name, prop => prop.GetValue(MediaInformation, null));
-                return result;
-            }
-        }
-
+   
         public MediaExtractorBase(int type, string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -107,7 +94,6 @@ namespace MediaMetadataExtractorLib.Main.Base
                 
             }
 
-           
         }
 
         //for sub class to extract additional tags
