@@ -120,8 +120,8 @@ namespace MediaMetadataExtractorLib.Main.Base
             if (gpsDir != null)
             {
                 MediaInformation.GeoLocation = gpsDir.GetGeoLocation();
-                MediaInformation.Latitude = gpsDir.GetGeoLocation().Latitude.ToString();
-                MediaInformation.Longitude = gpsDir.GetGeoLocation().Longitude.ToString();
+                MediaInformation.Latitude = gpsDir.GetGeoLocation().Latitude.ToString("0.00000");
+                MediaInformation.Longitude = gpsDir.GetGeoLocation().Longitude.ToString("0.00000");
             }
             
 
